@@ -33,10 +33,10 @@ vike f c layout page = do
 ssr :: Layout -> Page -> Effect Foreign
 ssr = vike ssrInBody \{ out } -> pure $ writeImpl out
 
-hydrate :: Foreign -> Layout -> Page -> Effect { route :: Page -> Effect Unit, unsub :: Effect Unit }
+hydrate :: Foreign -> Layout -> Page -> Effect { route :: Page -> Effect Unit, out :: Effect Unit }
 hydrate json layout page = do
   parsed :: SSROutput <- either (throw <<< show) pure $ read json
   vike (hydrateInBody parsed)
-    (\{ out: unsub, route } -> pure $ { route, unsub })
+    pure
     layout
     page
