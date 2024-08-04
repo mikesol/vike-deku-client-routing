@@ -36,7 +36,4 @@ ssr = vike ssrInBody \{ out } -> pure $ writeImpl out
 hydrate :: Foreign -> Layout -> Page -> Effect { route :: Page -> Effect Unit, out :: Effect Unit }
 hydrate json layout page = do
   parsed :: SSROutput <- either (throw <<< show) pure $ read json
-  vike (hydrateInBody parsed)
-    pure
-    layout
-    page
+  vike (hydrateInBody parsed) pure layout page
