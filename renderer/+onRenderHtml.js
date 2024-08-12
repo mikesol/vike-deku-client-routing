@@ -4,13 +4,11 @@ import { escapeInject, dangerouslySkipEscape } from "vike/server";
 import jsdomGlobal from "jsdom-global";
 import { ssr } from "../output/Vike.ClientRouting.Run";
 import { layout } from "../output/Vike.ClientRouting.Renderer.Layout";
-import { page as index } from "../output/Vike.ClientRouting.Pages.Index.Page"
-import { page as about } from "../output/Vike.ClientRouting.Pages.About.Page"
+import { route } from "../output/Vike.Minimal.Pages.Route"
 
 async function onRenderHtml(pageContext) {
   jsdomGlobal();
-  const { routeParams: { route } } = pageContext;
-  const Page = route === "index" ? index : about;
+  const Page = route(pageContext);
 
   document.getElementsByTagName("html")[0].innerHTML =
     "<head></head><body></body>";
