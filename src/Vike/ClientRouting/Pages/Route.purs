@@ -1,4 +1,4 @@
-module Vike.Minimal.Pages.Route where
+module Vike.ClientRouting.Pages.Route where
 
 import Deku.Core (Nut, text_)
 import Vike.ClientRouting.Pages.About.Page as About
